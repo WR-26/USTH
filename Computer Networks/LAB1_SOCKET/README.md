@@ -1,121 +1,123 @@
-HUONG DAN CHAY VA KIEM TRA - CHAT QUA LAN DUNG SOCKET
+HƯỚNG DẪN CHẠY VÀ KIỂM TRA - CHAT QUA LAN DÙNG SOCKET 
 ======================================================
+### make by: Nguyễn Hữu Dũng -2410234
 
-MO HINH: 1 may SERVER + 2 may CLIENT (A va B), ca 3 may cung mot mang
-Wi-Fi/LAN. A va B khong noi truc tiep voi nhau, ma chat qua trung gian
-la SERVER (server nhan tin tu 1 client roi chuyen tiep cho client con lai).
+MÔ HÌNH: 1 máy SERVER + 2 máy CLIENT (A và B), cả 3 máy cùng một mạng
+Wi-Fi/LAN. A và B không nối trực tiếp với nhau, mà chat qua trung gian
+là SERVER (server nhận tin từ 1 client rồi chuyển tiếp cho client còn lại).
 
-FILE CAN CO:
-  - server.py   -> chay tren MAY SERVER
-  - client.py   -> chay tren MAY A va MAY B (dung chung 1 file)
+FILE CẦN CÓ:
+  - server.py   -> chạy trên MÁY SERVER
+  - client.py   -> chạy trên MÁY A và MÁY B (dùng chung 1 file)
 
-YEU CAU TRUOC KHI CHAY
+YÊU CẦU TRƯỚC KHI CHẠY
 -----------------------
-1. Ca 3 may deu da cai Python 3 (kiem tra bang lenh: python --version
-   hoac python3 --version).
-2. Ca 3 may PHAI cung mot mang Wi-Fi/LAN (vi du cung ket noi vao 1 router,
-   hoac cung 1 diem phat Hotspot).
-3. Copy file server.py sang may Server; copy file client.py sang may A
-   va may B.
+1. Cả 3 máy đều đã cài Python 3 (kiểm tra bằng lệnh: python --version
+   hoặc python3 --version).
+2. Cả 3 máy PHẢI cùng một mạng Wi-Fi/LAN (ví dụ cùng kết nối vào 1 router,
+   hoặc cùng 1 điểm phát Hotspot).
+3. Copy file server.py sang máy Server; copy file client.py sang máy A
+   và máy B.
 
-BUOC 1: TIM DIA CHI IP CUA MAY SERVER
+BƯỚC 1: TÌM ĐỊA CHỈ IP CỦA MÁY SERVER
 --------------------------------------
-Tren MAY SERVER, mo Command Prompt / Terminal va go:
+Trên MÁY SERVER, mở Command Prompt / Terminal và gõ:
   - Windows:      ipconfig
-                  -> tim dong "IPv4 Address" trong phan Wi-Fi, vi du 192.168.0.104
+                  -> tìm dòng "IPv4 Address" trong phần Wi-Fi, ví dụ 192.168.0.104
   - macOS:        ifconfig | grep "inet "
-                  -> tim dia chi dang 192.168.x.x (bo qua 127.0.0.1)
+                  -> tìm địa chỉ dạng 192.168.x.x (bỏ qua 127.0.0.1)
   - Linux:        ip addr
-                  -> tim dia chi dang 192.168.x.x hoac 10.x.x.x
+                  -> tìm địa chỉ dạng 192.168.x.x hoặc 10.x.x.x
 
-  Ghi lai dia chi IP nay (vi du: 192.168.1.12). Day la IP ma 2 may
-  client se can nhap vao khi ket noi.
+  Ghi lại địa chỉ IP này (ví dụ: 192.168.1.12). Đây là IP mà 2 máy
+  client sẽ cần nhập vào khi kết nối.
 
-BUOC 2: CHAY SERVER
+BƯỚC 2: CHẠY SERVER
 ---------------------
-Tren MAY SERVER:
+Trên MÁY SERVER:
   python server.py
 
-Man hinh se hien:
+Màn hình sẽ hiện:
   === SERVER dang chay tai 0.0.0.0:5000 ===
 
-  -> KHONG TAT cua so nay trong suot buoi chat.
+  -> KHÔNG TẮT cửa sổ này trong suốt buổi chat.
 
-BUOC 3: CHAY CLIENT A
+BƯỚC 3: CHẠY CLIENT A
 ------------------------
-Tren MAY A:
+Trên MÁY A:
   python client.py
 
-Chuong trinh se hoi lan luot:
-  Nhap dia chi IP cua may server: 192.168.1.12   (IP ghi o Buoc 1)
+Chương trình sẽ hỏi lần lượt:
+  Nhap dia chi IP cua may server: 192.168.1.12   (IP ghi ở Bước 1)
   Nhap port (Enter de dung mac dinh 5000): (Enter)
   Nhap ten cua ban: An
 
-Neu ket noi thanh cong se thay:
+Nếu kết nối thành công sẽ thấy:
   Da ket noi toi server 192.168.1.12:5000. Go tin nhan va Enter de gui.
 
-  Ben cua so Server cung se hien:
+  Bên cửa sổ Server cũng sẽ hiện:
   [+] An (192.168.1.xx:xxxxx) da vao phong chat
 
-BUOC 4: CHAY CLIENT B
+BƯỚC 4: CHẠY CLIENT B
 ------------------------
-Tren MAY B, lam giong het Buoc 3 nhung nhap ten la Binh.
+Trên MÁY B, làm giống hệt Bước 3 nhưng nhập tên là Bình.
 
-KIEM TRA HOAT DONG (TEST)
+KIỂM TRA HOẠT ĐỘNG (TEST)
 ----------------------------
-1. Test A gui, B nhan:
-   - Tren may A, go: "Chao Binh, minh la An" roi Enter
-   - Ket qua mong doi:
-       + Man hinh Server hien: [An] Chao Binh, minh la An
-       + Man hinh B hien:      [An] Chao Binh, minh la An
-       + Man hinh A KHONG hien lai tin cua chinh minh (dung, vi server
-         khong gui nguoc lai cho nguoi vua gui)
+1. Test A gửi, B nhận:
+   - Trên máy A, gõ: "Chào Bình, mình là An" rồi Enter
+   - Kết quả mong đợi:
+       + Màn hình Server hiện: [An] Chào Bình, mình là An
+       + Màn hình B hiện:      [An] Chào Bình, mình là An
+       + Màn hình A KHÔNG hiện lại tin của chính mình (đúng, vì server
+         không gửi ngược lại cho người vừa gửi)
 
-2. Test B gui, A nhan:
-   - Tren may B, go: "Chao An, minh la Binh" roi Enter
-   - Ket qua mong doi: man hinh A va Server deu hien tin nay.
+2. Test B gửi, A nhận:
+   - Trên máy B, gõ: "Chào An, mình là Bình" rồi Enter
+   - Kết quả mong đợi: màn hình A và Server đều hiện tin này.
 
-3. Test nhan biet vao/roi phong:
-   - Dong client A (go /exit hoac Ctrl+C)
-   - Man hinh B va Server se hien: *** An da roi phong chat ***
-   - Mo lai client A (chay python client.py, nhap lai IP + ten An)
-   - Man hinh B va Server se hien: *** An da vao phong chat ***
+3. Test nhận biết vào/rời phòng:
+   - Đóng client A (gõ /exit hoặc Ctrl+C)
+   - Màn hình B và Server sẽ hiện: *** An da roi phong chat ***
+   - Mở lại client A (chạy python client.py, nhập lại IP + tên An)
+   - Màn hình B và Server sẽ hiện: *** An da vao phong chat ***
 
-4. Test gui lien tuc nhieu tin:
-   - Go nhieu dong tin nhan lien tiep tu ca A va B xen ke nhau, kiem tra
-     thu tu hien thi tren tung may co dung khong.
+4. Test gửi liên tục nhiều tin:
+   - Gõ nhiều dòng tin nhắn liên tiếp từ cả A và B xen kẽ nhau, kiểm tra
+     thứ tự hiển thị trên từng máy có đúng không.
 
-KET THUC BUOI CHAT
+KẾT THÚC BUỔI CHAT
 ---------------------
-  - Tren A va B: go /exit (hoac Ctrl+C) de dong ket noi
-  - Tren Server: nhan Ctrl+C de dung server
+  - Trên A và B: gõ /exit (hoặc Ctrl+C) để đóng kết nối
+  - Trên Server: nhấn Ctrl+C để dừng server
 
-XU LY LOI THUONG GAP
+XỬ LÝ LỖI THƯỜNG GẶP
 ------------------------
-Loi "Khong the ket noi toi ... -> [Errno ...] Connection refused"
-  -> Server chua chay, hoac go sai IP/port. Kiem tra lai Buoc 1 va 2.
+Lỗi "Khong the ket noi toi ... -> [Errno ...] Connection refused"
+  -> Server chưa chạy, hoặc gõ sai IP/port. Kiểm tra lại Bước 1 và 2.
 
-Loi ket noi bi "timeout" / treo may khong ket noi duoc
-  -> Kha nang do FIREWALL tren may Server chan cong 5000.
-     Windows: vao Windows Defender Firewall -> Allow an app through
-     firewall -> cho phep Python (hoac tam thoi tat firewall de test).
-  -> Kiem tra lai ca 3 may co THAT SU cung mang Wi-Fi khong (vi du mang
-     cong ty/truong co the chan giao tiep giua cac thiet bi trong mang).
+Lỗi kết nối bị "timeout" / treo máy không kết nối được
+  -> Khả năng do FIREWALL trên máy Server chặn cổng 5000.
+     Windows: vào Windows Defender Firewall -> Allow an app through
+     firewall -> cho phép Python (hoặc tạm thời tắt firewall để test).
+  -> Kiểm tra lại cả 3 máy có THẬT SỰ cùng mạng Wi-Fi không (ví dụ mạng
+     công ty/trường có thể chặn giao tiếp giữa các thiết bị trong mạng).
 
-Doi IP server (vi du chuyen mang khac)
-  -> Chi can chay lai Buoc 1 de lay IP moi, nhap IP moi nay khi chay lai
-     client.py o A va B. Khong can sua code.
+Đổi IP server (ví dụ chuyển mạng khác)
+  -> Chỉ cần chạy lại Bước 1 để lấy IP mới, nhập IP mới này khi chạy lại
+     client.py ở A và B. Không cần sửa code.
 
-Port 5000 bi chiem (loi "Address already in use")
-  -> Mo file server.py, doi PORT = 5000 thanh so khac (vi du 5050).
-     Khi chay client.py, o buoc nhap port thi go dung so do (5050).
+Port 5000 bị chiếm (lỗi "Address already in use")
+  -> Mở file server.py, đổi PORT = 5000 thành số khác (ví dụ 5050).
+     Khi chạy client.py, ở bước nhập port thì gõ đúng số đó (5050).
 
-GHI CHU
+GHI CHÚ
 ---------
-- Neu 3 may deu la may that (khong dung Hotspot dien thoai/laptop nhu
-  trong ban demo cu), cach lam nay van dung y het, chi can dam bao cung
-  1 mang va biet dung IP cua may lam server.
-- File client.py dung chung cho ca A va B; diem khac nhau duy nhat la
-  cai TEN ban nhap luc chay chuong trinh.
-
-  
+- Nếu 3 máy đều là máy thật (không dùng Hotspot điện thoại/laptop như
+  trong bản demo cũ), cách làm này vẫn đúng y hệt, chỉ cần đảm bảo cùng
+  1 mạng và biết đúng IP của máy làm server.
+- File client.py dùng chung cho cả A và B; điểm khác nhau duy nhất là
+  cái TÊN bạn nhập lúc chạy chương trình.
+- Các dòng thông báo do chương trình in ra (ví dụ "Da ket noi toi server...",
+  "*** An da vao phong chat ***") được giữ nguyên không dấu, đúng như code
+  hiển thị.
